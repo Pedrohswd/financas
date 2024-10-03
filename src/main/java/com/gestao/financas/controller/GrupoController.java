@@ -41,7 +41,7 @@ public class GrupoController {
         return ResponseEntity.ok(grupo);
     }
 
-    @PostMapping("/salvar")
+    @PutMapping("/salvar")
     public ResponseEntity<Grupo> salvarGrupo(@RequestBody Grupo grupo) {
         Grupo grupoSalvo = grupoService.salvar(grupo);
         return ResponseEntity.ok(grupoSalvo);

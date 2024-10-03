@@ -1,5 +1,7 @@
 package com.gestao.financas.dto;
 
+import com.gestao.financas.model.Pessoa;
+
 import java.util.Set;
 
 public class GrupoDTO {
@@ -9,6 +11,8 @@ public class GrupoDTO {
     private String descricao;
     private Boolean isSaldoNegativo;
     private Set<Long> metaIds;
+
+    private Pessoa[] pessoa;
 
     public Long getId() {
         return id;
