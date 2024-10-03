@@ -20,7 +20,8 @@ public class MetaService {
     private MetaRepository metaRepository;
 
     @Autowired
-    private GrupoRepository grupoRepository;
+    private GrupoService grupoService;
+
 
     public Optional<Meta> buscarMetaPorGrupoECategoria(Long grupoId, Categoria categoria) {
         return metaRepository.findByGrupoIdAndCategoria(grupoId, categoria);
@@ -38,7 +39,7 @@ public class MetaService {
             metaRepository.save(meta);
 
             if (valorAtual < 0) {
-                meta.getGrupo().setSaldoNegativo(true);
+                grupoService.atualizarSaldoNegativo(meta.getGrupo(), true);
             }
         }
     }
@@ -57,7 +58,7 @@ public class MetaService {
     }
 
     public Meta salvarMeta(MetaDTO metaDTO) {
-        Grupo grupo = grupoRepository.findById(metaDTO.getGrupoId())
+        Grupo grupo = grupoService.buscarPorId(metaDTO.getGrupoId())
                 .orElseThrow(() -> new RuntimeException("Grupo não encontrado"));
 
         Meta meta = new Meta();
