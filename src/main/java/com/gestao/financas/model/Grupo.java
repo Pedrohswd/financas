@@ -19,13 +19,12 @@ public class Grupo {
     @Column(length = 255)
     private String descricao;
 
-    @OneToMany
-    @JoinColumn(name = "grupo_id")
-    private List<Pessoa> pessoas;
+    @ManyToOne
+    private Pessoa pessoa;
     private Boolean isSaldoNegativo;
 
     @OneToOne(fetch = FetchType.EAGER)
-    private Meta metas;
+    private Meta meta;
 
 
     public Grupo() {
@@ -36,7 +35,7 @@ public class Grupo {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.metas = meta;
+        this.meta = meta;
     }
 
 
@@ -64,12 +63,12 @@ public class Grupo {
         this.descricao = descricao;
     }
 
-    public List<Pessoa> getPessoas() {
-        return pessoas;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public Boolean getSaldoNegativo() {
@@ -81,10 +80,10 @@ public class Grupo {
     }
 
     public Meta getMetas() {
-        return metas;
+        return meta;
     }
 
     public void setMetas(Meta meta) {
-        this.metas = meta;
+        this.meta = meta;
     }
 }

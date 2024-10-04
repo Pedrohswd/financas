@@ -2,6 +2,8 @@ package com.gestao.financas.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "pessoa")
 public class Pessoa {
@@ -21,6 +23,10 @@ public class Pessoa {
 
     @Column(nullable = false, length = 15)
     private String telefone;
+
+    @OneToMany
+    @JoinColumn(name = "pessoa_id")
+    private List<Grupo> grupos;
 
     public Pessoa() {
     }

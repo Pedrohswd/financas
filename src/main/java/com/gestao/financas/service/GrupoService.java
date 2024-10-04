@@ -22,6 +22,9 @@ public class GrupoService {
     @Autowired
     private MetaRepository metaRepository;
 
+    @Autowired
+    private PessoaService pessoaService;
+
     public void atualizarSaldoNegativo(Grupo grupo, boolean saldoNegativo) {
         grupo.setSaldoNegativo(saldoNegativo);
         grupoRepository.save(grupo);
@@ -51,7 +54,8 @@ public class GrupoService {
         grupo.setNome(grupoDTO.getNome());
         grupo.setDescricao(grupoDTO.getDescricao());
         grupo.setSaldoNegativo(grupoDTO.getIsSaldoNegativo());
-        //grupo.setMetas(grupoDTO.getMeta());
+        grupo.setMetas(metaRepository.findById(grupoDTO.getMeta().getId()).orElseThrow());
+        grupo.setPessoa(pessoaService.buscarPorId(grupoDTO.getPessoa().getId()).orElseThrow());
 
 
         return grupoRepository.save(grupo);

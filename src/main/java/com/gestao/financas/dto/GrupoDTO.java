@@ -59,6 +59,26 @@ public class GrupoDTO {
         this.isSaldoNegativo = isSaldoNegativo;
     }
 
+    public Boolean getSaldoNegativo() {
+        return isSaldoNegativo;
+    }
+
+    public void setSaldoNegativo(Boolean saldoNegativo) {
+        isSaldoNegativo = saldoNegativo;
+    }
+
+    public PesssoaDTO getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(PesssoaDTO pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public void setMeta(MetaDTO meta) {
+        this.meta = meta;
+    }
+
     public MetaDTO getMeta() {
         return meta;
     }
