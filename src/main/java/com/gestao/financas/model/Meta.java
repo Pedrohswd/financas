@@ -1,8 +1,11 @@
 package com.gestao.financas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gestao.financas.enuns.Categoria;
 import com.gestao.financas.enuns.Tipo;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "meta")
@@ -12,8 +15,8 @@ public class Meta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 50)
-    private Tipo tipo;
+    @Column()
+    private String descricao;
 
     @Column(nullable = false)
     private Double valorObjetivo;
@@ -21,23 +24,19 @@ public class Meta {
     @Column(nullable = false)
     private Double valorAtual;
 
-    @ManyToOne
-    @JoinColumn(name = "grupo_id", nullable = false)
+    @OneToOne
+    @JsonIgnore
     private Grupo grupo;
-
-    @Column(nullable = false, length = 50)
-    private Categoria categoria;
 
     public Meta() {
     }
 
-    public Meta(Long id, Tipo tipo, Double valorObjetivo, Double valorAtual, Grupo grupo, Categoria categoria) {
+    public Meta(Long id, String descricao, Double valorObjetivo, Double valorAtual, Grupo grupo) {
         this.id = id;
-        this.tipo = tipo;
+        this.descricao = descricao;
         this.valorObjetivo = valorObjetivo;
         this.valorAtual = valorAtual;
         this.grupo = grupo;
-        this.categoria = categoria ;
     }
 
     public Long getId() {
@@ -48,12 +47,12 @@ public class Meta {
         this.id = id;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Double getValorObjetivo() {
@@ -80,11 +79,4 @@ public class Meta {
         this.grupo = grupo;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 }

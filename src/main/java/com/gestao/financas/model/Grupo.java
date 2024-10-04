@@ -24,20 +24,19 @@ public class Grupo {
     private List<Pessoa> pessoas;
     private Boolean isSaldoNegativo;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "grupo")
-    private Set<Meta> metas;
+    @OneToOne(fetch = FetchType.EAGER)
+    private Meta metas;
 
 
     public Grupo() {
     }
 
 
-    public Grupo(Long id, String nome, String descricao, Set<Meta> metas) {
+    public Grupo(Long id, String nome, String descricao, Meta meta) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.metas = metas;
+        this.metas = meta;
     }
 
 
@@ -81,11 +80,11 @@ public class Grupo {
         isSaldoNegativo = saldoNegativo;
     }
 
-    public Set<Meta> getMetas() {
+    public Meta getMetas() {
         return metas;
     }
 
-    public void setMetas(Set<Meta> metas) {
-        this.metas = metas;
+    public void setMetas(Meta meta) {
+        this.metas = meta;
     }
 }

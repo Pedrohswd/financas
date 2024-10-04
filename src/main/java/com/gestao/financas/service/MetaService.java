@@ -4,7 +4,6 @@ import com.gestao.financas.dto.MetaDTO;
 import com.gestao.financas.enuns.Categoria;
 import com.gestao.financas.model.Grupo;
 import com.gestao.financas.model.Meta;
-import com.gestao.financas.repository.GrupoRepository;
 import com.gestao.financas.repository.MetaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +17,10 @@ public class MetaService {
 
     @Autowired
     private MetaRepository metaRepository;
-
     @Autowired
     private GrupoService grupoService;
 
 
-    public Optional<Meta> buscarMetaPorGrupoECategoria(Long grupoId, Categoria categoria) {
-        return metaRepository.findByGrupoIdAndCategoria(grupoId, categoria);
-    }
 
     @Transactional
     public void atualizarValorMeta(Long metaId, Double valorLancamento, boolean isDespesa) {
@@ -43,8 +38,8 @@ public class MetaService {
             }
         }
     }
-    public Optional<Meta> buscarPorId(Long id) {
-        return metaRepository.findById(id);
+    public Meta buscarPorId(Long id) {
+        return metaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Não encontrada"));
     }
 
     public List<Meta> listarTodos() {
@@ -58,16 +53,12 @@ public class MetaService {
     }
 
     public Meta salvarMeta(MetaDTO metaDTO) {
-        Grupo grupo = grupoService.buscarPorId(metaDTO.getGrupoId())
-                .orElseThrow(() -> new RuntimeException("Grupo não encontrado"));
 
         Meta meta = new Meta();
         meta.setId(metaDTO.getId());
-        meta.setTipo(metaDTO.getTipo());
+        meta.setDescricao(metaDTO.getDescricao());
         meta.setValorObjetivo(metaDTO.getValorObjetivo());
         meta.setValorAtual(metaDTO.getValorAtual());
-        meta.setGrupo(grupo);
-        meta.setCategoria(metaDTO.getCategoria());
 
         return metaRepository.save(meta);
     }

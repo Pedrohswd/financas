@@ -31,8 +31,8 @@ public class GrupoService {
         return grupoRepository.save(grupo);
     }
 
-    public Optional<Grupo> buscarPorId(Long id) {
-        return grupoRepository.findById(id);
+    public Grupo buscarPorId(Long id) {
+        return grupoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Grupo não encontrada"));
     }
 
     public List<Grupo> buscarTodos() {
@@ -51,15 +51,8 @@ public class GrupoService {
         grupo.setNome(grupoDTO.getNome());
         grupo.setDescricao(grupoDTO.getDescricao());
         grupo.setSaldoNegativo(grupoDTO.getIsSaldoNegativo());
+        //grupo.setMetas(grupoDTO.getMeta());
 
-        // Associar metas ao grupo
-        Set<Meta> metas = new HashSet<>();
-        if (grupoDTO.getMetaIds() != null) {
-            for (Long metaId : grupoDTO.getMetaIds()) {
-                metaRepository.findById(metaId).ifPresent(metas::add);
-            }
-        }
-        grupo.setMetas(metas);
 
         return grupoRepository.save(grupo);
     }

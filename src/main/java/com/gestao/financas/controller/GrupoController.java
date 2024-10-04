@@ -19,8 +19,8 @@ public class GrupoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Grupo> buscarGrupoPorId(@PathVariable Long id) {
-        Optional<Grupo> grupo = grupoService.buscarPorId(id);
-        return grupo.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        Grupo grupo = grupoService.buscarPorId(id);
+        return ResponseEntity.ok(grupo);
     }
 
     @GetMapping

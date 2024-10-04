@@ -1,5 +1,7 @@
 package com.gestao.financas.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gestao.financas.model.Meta;
 import com.gestao.financas.model.Pessoa;
 
 import java.util.Set;
@@ -10,9 +12,20 @@ public class GrupoDTO {
     private String nome;
     private String descricao;
     private Boolean isSaldoNegativo;
-    private Set<Long> metaIds;
+    private PesssoaDTO pessoa;
+    private MetaDTO meta;
 
-    private Pessoa[] pessoa;
+    public GrupoDTO() {
+    }
+
+    public GrupoDTO(Long id, String nome, String descricao, Boolean isSaldoNegativo, MetaDTO meta, PesssoaDTO pessoa) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.isSaldoNegativo = isSaldoNegativo;
+        this.meta = meta;
+        this.pessoa = pessoa;
+    }
 
     public Long getId() {
         return id;
@@ -46,11 +59,11 @@ public class GrupoDTO {
         this.isSaldoNegativo = isSaldoNegativo;
     }
 
-    public Set<Long> getMetaIds() {
-        return metaIds;
+    public MetaDTO getMeta() {
+        return meta;
     }
 
-    public void setMetaIds(Set<Long> metaIds) {
-        this.metaIds = metaIds;
+    public void setMetaIds(MetaDTO metaId) {
+        this.meta = metaId;
     }
 }

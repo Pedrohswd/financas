@@ -29,24 +29,23 @@ public class LancamentoService {
     @Autowired
     private GrupoService grupoService;
 
-
     @Transactional
     public Lancamento criarLancamento(Long grupoId, String nome, String descricao, LocalDate data, Tipo tipo, Double valor, Categoria categoria) {
 
+        Grupo grupo = grupoService.buscarPorId(grupoId);
+        Meta meta = grupo.getMetas();
 
-        Optional<Meta> metaOpt = metaService.buscarMetaPorGrupoECategoria(grupoId, categoria);
         validaLancamentoCategoria(categoria);
-        if (metaOpt.isPresent()) {
-            Meta meta = metaOpt.get();
+        if (meta != null) {
             Lancamento lancamento =
-                    new Lancamento(null, nome, descricao, data, tipo, valor, categoria, meta.getGrupo());
+                    new Lancamento(null, nome, descricao, data, tipo, valor, categoria, grupo);
 
             lancamentoRepository.save(lancamento);
 
             boolean isDespesa = tipo == Tipo.DESPESA;
             metaService.atualizarValorMeta(meta.getId(), valor, isDespesa);
             //informar que o grupo esta negativo;
-            lancamento.setNegativouGrupo(meta.getGrupo().getSaldoNegativo());
+            lancamento.setNegativouGrupo(grupo.getSaldoNegativo());
 
             return lancamento;
         } else {
@@ -73,8 +72,7 @@ public class LancamentoService {
         lancamentoExistente.setValor(lancamentoDTO.getValor());
         lancamentoExistente.setCategoria(lancamentoDTO.getCategoria());
 
-        Grupo grupo = grupoService.buscarPorId(lancamentoDTO.getGrupoId())
-                .orElseThrow(() -> new IllegalArgumentException("Grupo não encontrado"));
+        Grupo grupo = grupoService.buscarPorId(lancamentoDTO.getGrupoId());
         lancamentoExistente.setGrupo(grupo);
 
         return lancamentoRepository.save(lancamentoExistente);

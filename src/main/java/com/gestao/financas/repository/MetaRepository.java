@@ -10,6 +10,5 @@ import java.util.Optional;
 @Repository
 public interface MetaRepository extends JpaRepository<Meta, Long> {
 
-    Optional<Meta> findByGrupoIdAndCategoria(Long grupoId, Categoria categoria);
 
 }

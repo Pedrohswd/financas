@@ -1,5 +1,8 @@
 package com.gestao.financas.controller;
 
+import com.gestao.financas.dto.LancamentoDTO;
+import com.gestao.financas.dto.PesssoaDTO;
+import com.gestao.financas.model.Lancamento;
 import com.gestao.financas.model.Pessoa;
 import com.gestao.financas.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,11 @@ public class PessoaController {
     public ResponseEntity<List<Pessoa>> listarPessoas() {
         List<Pessoa> pessoas = pessoaService.buscarTodas();
         return ResponseEntity.ok(pessoas);
+    }
+
+    @PutMapping("/atualizar/{id}")
+    public Pessoa atualizarLancamento(@PathVariable Long id, @RequestBody PesssoaDTO pesssoaDTO) {
+        return pessoaService.atualizarPessoa(id, pesssoaDTO);
     }
 
     @DeleteMapping("/{id}")

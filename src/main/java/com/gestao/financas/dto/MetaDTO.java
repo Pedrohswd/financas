@@ -6,22 +6,20 @@ import com.gestao.financas.enuns.Tipo;
 public class MetaDTO {
 
     private Long id;
-    private Tipo tipo;
+    private String descricao;
     private Double valorObjetivo;
     private Double valorAtual;
     private Long grupoId;
-    private Categoria categoria;
 
     public MetaDTO() {
     }
 
-    public MetaDTO(Long id, Tipo tipo, Double valorObjetivo, Double valorAtual, Long grupoId, Categoria categoria) {
+    public MetaDTO(Long id, String descricao, Double valorObjetivo, Double valorAtual, Long grupoId, Categoria categoria) {
         this.id = id;
-        this.tipo = tipo;
+        this.descricao = descricao;
         this.valorObjetivo = valorObjetivo;
         this.valorAtual = valorAtual;
         this.grupoId = grupoId;
-        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -32,12 +30,12 @@ public class MetaDTO {
         this.id = id;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Double getValorObjetivo() {
@@ -62,13 +60,5 @@ public class MetaDTO {
 
     public void setGrupoId(Long grupoId) {
         this.grupoId = grupoId;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
     }
 }

@@ -25,13 +25,19 @@ public class MetaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Meta> buscarMetaPorId(@PathVariable Long id) {
-        Optional<Meta> meta = metaService.buscarPorId(id);
-        return meta.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        Meta meta = metaService.buscarPorId(id);
+        return ResponseEntity.ok(meta);
     }
 
     @GetMapping
     public ResponseEntity<List<Meta>> listarMetas() {
         List<Meta> metas = metaService.listarTodos();
+        return ResponseEntity.ok(metas);
+    }
+
+    @PutMapping
+    public ResponseEntity<Meta> editarMeta(@RequestBody MetaDTO metaDTO) {
+        Meta metas = metaService.salvarMeta(metaDTO);
         return ResponseEntity.ok(metas);
     }
 
