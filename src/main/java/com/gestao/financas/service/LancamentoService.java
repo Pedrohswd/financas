@@ -1,12 +1,12 @@
 package com.gestao.financas.service;
 
+import com.gestao.financas.dto.GrupoDTO;
 import com.gestao.financas.dto.LancamentoDTO;
 import com.gestao.financas.enuns.Categoria;
 import com.gestao.financas.enuns.Tipo;
 import com.gestao.financas.model.Grupo;
 import com.gestao.financas.model.Lancamento;
 import com.gestao.financas.model.Meta;
-import com.gestao.financas.repository.GrupoRepository;
 import com.gestao.financas.repository.LancamentoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ public class LancamentoService {
     private GrupoService grupoService;
 
     @Transactional
-    public Lancamento criarLancamento(Long grupoId, String nome, String descricao, LocalDate data, Tipo tipo, Double valor, Categoria categoria) {
+    public Lancamento criarLancamento(Long id, String nome, String descricao, LocalDate data, Tipo tipo, Double valor, Categoria categoria, GrupoDTO grupoDTO) {
 
-        Grupo grupo = grupoService.buscarPorId(grupoId);
+        Grupo grupo = grupoService.buscarPorId(grupoDTO.getId());
         Meta meta = grupo.getMetas();
 
         validaLancamentoCategoria(categoria);
@@ -72,7 +72,7 @@ public class LancamentoService {
         lancamentoExistente.setValor(lancamentoDTO.getValor());
         lancamentoExistente.setCategoria(lancamentoDTO.getCategoria());
 
-        Grupo grupo = grupoService.buscarPorId(lancamentoDTO.getGrupoId());
+        Grupo grupo = grupoService.buscarPorId(lancamentoDTO.getGrupo().getId());
         lancamentoExistente.setGrupo(grupo);
 
         return lancamentoRepository.save(lancamentoExistente);
