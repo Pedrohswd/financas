@@ -1,16 +1,24 @@
 package com.gestao.financas.dto;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Dados da pessoa")
 public class PesssoaDTO {
 
+    @Schema(description = "Identificador da pessoa", example = "1")
     private Long id;
 
+    @Schema(description = "Nome da pessoa", example = "Pedro Henrique")
     private String nome;
 
+    @Schema(description = "CPF da pessoa", example = "123.456.789-00")
     private String cpf;
 
+    @Schema(description = "E-mail da pessoa", example = "pedro@example.com")
     private String email;
 
+    @Schema(description = "Telefone da pessoa", example = "(62) 99999-9999")
     private String telefone;
 
     public PesssoaDTO() {

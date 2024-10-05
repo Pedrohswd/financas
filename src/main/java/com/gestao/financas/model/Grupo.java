@@ -1,29 +1,38 @@
 package com.gestao.financas.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "grupo")
+@Schema(description = "Grupo financeiro que organiza os lançamentos")
 public class Grupo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador do grupo", example = "1")
     private Long id;
 
     @Column(nullable = false, length = 100)
+    @Schema(description = "Nome do grupo", example = "Investimentos")
     private String nome;
 
     @Column(length = 255)
+    @Schema(description = "Descrição do grupo", example = "Grupo destinado a investimentos de longo prazo")
     private String descricao;
 
     @ManyToOne
+    @Schema(description = "Pessoa responsável pelo grupo")
     private Pessoa pessoa;
+
+    @Schema(description = "Indica se o grupo possui saldo negativo", example = "false")
     private Boolean isSaldoNegativo;
 
     @OneToOne(fetch = FetchType.EAGER)
+    @Schema(description = "Meta financeira associada ao grupo")
     private Meta meta;
 
 

@@ -3,16 +3,30 @@ package com.gestao.financas.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gestao.financas.model.Meta;
 import com.gestao.financas.model.Pessoa;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Set;
 
+
+@Schema(description = "Dados do grupo financeiro")
 public class GrupoDTO {
 
+    @Schema(description = "Identificador do grupo", example = "1")
     private Long id;
+
+    @Schema(description = "Nome do grupo", example = "Investimentos")
     private String nome;
+
+    @Schema(description = "Descrição do grupo", example = "Grupo destinado a investimentos de longo prazo")
     private String descricao;
+
+    @Schema(description = "Indica se o grupo possui saldo negativo", example = "false")
     private Boolean isSaldoNegativo;
+
+    @Schema(description = "Pessoa responsável pelo grupo")
     private PesssoaDTO pessoa;
+
+    @Schema(description = "Meta associada ao grupo")
     private MetaDTO meta;
 
     public GrupoDTO() {

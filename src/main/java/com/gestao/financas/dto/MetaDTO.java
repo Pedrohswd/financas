@@ -2,13 +2,24 @@ package com.gestao.financas.dto;
 
 import com.gestao.financas.enuns.Categoria;
 import com.gestao.financas.enuns.Tipo;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Dados da meta financeira")
 public class MetaDTO {
 
+    @Schema(description = "Identificador da meta", example = "1")
     private Long id;
+
+    @Schema(description = "Descrição da meta", example = "Meta para reserva de emergência")
     private String descricao;
+
+    @Schema(description = "Valor objetivo da meta", example = "10000.00")
     private Double valorObjetivo;
+
+    @Schema(description = "Valor atual da meta", example = "4500.00")
     private Double valorAtual;
+
+    @Schema(description = "Identificador do grupo associado", example = "1")
     private Long grupoId;
 
     public MetaDTO() {

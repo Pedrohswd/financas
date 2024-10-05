@@ -3,18 +3,35 @@ package com.gestao.financas.dto;
 import com.gestao.financas.enuns.Categoria;
 import com.gestao.financas.enuns.Tipo;
 import com.gestao.financas.model.Grupo;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 
+@Schema(description = "Dados do lançamento financeiro")
 public class LancamentoDTO {
 
+    @Schema(description = "Identificador do lançamento", example = "1")
     private Long id;
+
+    @Schema(description = "Nome do lançamento", example = "Salário")
     private String nome;
+
+    @Schema(description = "Descrição do lançamento", example = "Recebimento de salário")
     private String descricao;
+
+    @Schema(description = "Data do lançamento", example = "2024-10-05")
     private LocalDate data;
+
+    @Schema(description = "Tipo do lançamento", example = "RECEITA")
     private Tipo tipo;
+
+    @Schema(description = "Valor do lançamento", example = "3500.00")
     private Double valor;
+
+    @Schema(description = "Categoria do lançamento", example = "SALARIO")
     private Categoria categoria;
+
+    @Schema(description = "Grupo associado ao lançamento")
     private GrupoDTO grupo;
 
     public LancamentoDTO() {

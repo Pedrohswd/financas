@@ -2,40 +2,51 @@ package com.gestao.financas.model;
 
 import com.gestao.financas.enuns.Categoria;
 import com.gestao.financas.enuns.Tipo;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "lancamento")
+@Schema(description = "Lançamento financeiro registrado no sistema")
 public class Lancamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador do lançamento", example = "1")
     private Long id;
 
     @Column(nullable = false, length = 100)
+    @Schema(description = "Nome do lançamento", example = "Salário")
     private String nome;
 
     @Column(length = 255)
+    @Schema(description = "Descrição do lançamento", example = "Recebimento de salário")
     private String descricao;
 
     @Column(nullable = false)
+    @Schema(description = "Data do lançamento", example = "2024-10-05")
     private LocalDate data;
 
     @Column(nullable = false, length = 50)
+    @Schema(description = "Tipo do lançamento", example = "RECEITA")
     private Tipo tipo;
 
     @Column(nullable = false)
+    @Schema(description = "Valor do lançamento", example = "3500.00")
     private Double valor;
 
     @Column(nullable = false, length = 50)
+    @Schema(description = "Categoria do lançamento", example = "SALARIO")
     private Categoria categoria;
 
     @ManyToOne
     @JoinColumn(name = "grupo_id", nullable = false)
+    @Schema(description = "Grupo financeiro associado ao lançamento")
     private Grupo grupo;
 
     @Transient
+    @Schema(description = "Indica se o grupo ficou negativo com o lançamento", example = "false")
     private boolean negativouGrupo;
 
 

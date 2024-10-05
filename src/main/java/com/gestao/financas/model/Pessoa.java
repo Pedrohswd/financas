@@ -1,31 +1,39 @@
 package com.gestao.financas.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "pessoa")
+@Schema(description = "Dados da pessoa associada aos grupos financeiros")
 public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador da pessoa", example = "1")
     private Long id;
 
     @Column(nullable = false, length = 100, unique = true)
+    @Schema(description = "Nome da pessoa", example = "Pedro Henrique")
     private String nome;
 
     @Column(nullable = false, unique = true, length = 14)
+    @Schema(description = "CPF da pessoa", example = "123.456.789-00")
     private String cpf;
 
     @Column(nullable = false, unique = true, length = 100)
+    @Schema(description = "E-mail da pessoa", example = "pedro@example.com")
     private String email;
 
     @Column(nullable = false, length = 15)
+    @Schema(description = "Telefone da pessoa", example = "(62) 99999-9999")
     private String telefone;
 
     @OneToMany
     @JoinColumn(name = "pessoa_id")
+    @Schema(description = "Lista de grupos financeiros associados à pessoa")
     private List<Grupo> grupos;
 
     public Pessoa() {
